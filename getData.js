@@ -6,7 +6,9 @@ const YESTERDAY = 1;
 const DAY_BEFORE_YESTERDAY = 2;
 
 const getData = async (day = TODAY) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+  });
   const page = await browser.newPage();
   await page.goto(url);
   await page.focus('[name="userName"]');
