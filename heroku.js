@@ -4,9 +4,11 @@ const functions = require("firebase-functions");
 const { getData, YESTERDAY } = require("./getData");
 
 const express = require("express");
+const bodyParser = require("body-parser");
 const webApp = express();
+webApp.use(bodyParser.json());
 
-webApp.post("/", (request, response) => {
+webApp.all("/", (request, response) => {
   // getData(YESTERDAY).then(data => res.send(JSON.stringify(data)));
 
   // a. the action name from the make_name Dialogflow intent
