@@ -6,7 +6,7 @@ const { getData, YESTERDAY } = require("./getData");
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
+app.post("/", (req, res) => {
   getData(YESTERDAY).then(data => res.send(JSON.stringify(data)));
 });
 
