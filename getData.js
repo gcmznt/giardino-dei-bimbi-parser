@@ -19,26 +19,21 @@ const getData = async (day = TODAY) => {
 
   await page.waitForNavigation({ waitUntil: "load" });
 
-  const act = await page.evaluate(
-    day => ({
-      title: Array.from(
-        document
-          .querySelectorAll('[id*="AttivitaBimbo"]')
-          [day].querySelectorAll(".title")
-      ).map(e => e.innerText),
-      text: Array.from(
-        document
-          .querySelectorAll('[id*="AttivitaBimbo"]')
-          [day].querySelectorAll(".text")
-      ).map(e => e.innerText)
-    }),
-    day
-  );
+  const act = await page.evaluate(() => {
+    const days = document.querySelectorAll('[id*="AttivitaBimbo"]');
+
+    return Array.from(days).map(d => ({
+      title: Array.from(d.querySelectorAll(".title")).map(e => e.innerText),
+      text: Array.from(d.querySelectorAll(".text")).map(e => e.innerText)
+    }));
+  });
   await browser.close();
-  return act.title.map((e, i) => ({
-    title: e,
-    text: act.text[i]
-  }));
+  return act.map(a =>
+    a.title.map((e, i) => ({
+      title: e,
+      text: a.text[i]
+    }))
+  );
 };
 
 module.exports = {
