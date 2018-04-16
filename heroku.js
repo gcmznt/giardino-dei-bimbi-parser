@@ -1,5 +1,6 @@
 const express = require("express");
 const { getData } = require("./getData");
+const { giardinoDeiBimbi } = require("./webhook");
 
 const app = express();
 app.get("/", (req, res) => {
@@ -10,6 +11,10 @@ app.get("/", (req, res) => {
       return;
     })
     .catch();
+});
+
+app.get("/hook", (req, res) => {
+  giardinoDeiBimbi(req, res);
 });
 
 app.listen(process.env.PORT || 3000, () =>
