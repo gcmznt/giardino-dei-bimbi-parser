@@ -1,6 +1,6 @@
 const express = require("express");
 const { getData } = require("./getData");
-const { giardinoDeiBimbi } = require("./webhook");
+// const { giardinoDeiBimbi } = require("./webhook");
 
 const app = express();
 app.get("/", (req, res) => {
@@ -13,9 +13,9 @@ app.get("/", (req, res) => {
     .catch();
 });
 
-app.get("/hook", (req, res) => {
-  giardinoDeiBimbi(req, res);
-});
+// app.get("/hook", (req, res) => {
+//   giardinoDeiBimbi(req, res);
+// });
 
 app.listen(process.env.PORT || 3000, () =>
   console.log(`Example app listening on port ${process.env.PORT || 3000}!`)
